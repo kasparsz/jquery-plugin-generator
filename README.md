@@ -1,10 +1,12 @@
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][travis-image]][travis-url]
+[npm-url]: https://npmjs.org/package/jquery-plugin-generator
+[npm-image]: http://img.shields.io/npm/v/jquery-plugin-generator.svg
+[travis-url]: https://travis-ci.org/kasparsz/jquery-plugin-generator
+[travis-image]: http://img.shields.io/travis/kasparsz/jquery-plugin-generator.svg
 
 # jquery-plugin-generator
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
-> jQuery plugin generator from classes / functions
+jQuery plugin generator from classes / functions
 
 ## Install
 
@@ -67,3 +69,8 @@ $ npm install -d && npm test
 
 Copyright © 2016, [Kaspars Zuks](https://github.com/kasparsz).
 Released under the [MIT license](https://github.com/kasparsz/jquery-plugin-generator/blob/master/LICENSE).
+
+[npm-url]: https://npmjs.org/package/jquery-plugin-generator
+[npm-image]: http://img.shields.io/npm/v/jquery-plugin-generator.svg
+[travis-url]: https://travis-ci.org/kasparsz/jquery-plugin-generator
+[travis-image]: http://img.shields.io/travis/kasparsz/jquery-plugin-generator.svg
