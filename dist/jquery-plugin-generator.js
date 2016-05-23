@@ -1,3 +1,10 @@
+/*!
+ * jquery-plugin-generator <https://github.com/kasparsz/jquery-plugin-generator>
+ *
+ * Copyright (c) 2016, Kaspars Zuks.
+ * Licensed under the MIT License.
+ */
+
 "use strict";
 
 // guid counter
