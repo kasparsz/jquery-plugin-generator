@@ -17,7 +17,6 @@
   ],
   "main": "dist/jquery-plugin-generator.js",
   "scripts": {
-    "docs": "verb",
     "prepublish": "buble src/index.js -o dist/jquery-plugin-generator.js",
     "test": "mocha"
   },
