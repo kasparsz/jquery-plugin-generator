@@ -1,0 +1,34 @@
+{
+  "name": "jquery-plugin-generator",
+  "description": "jQuery plugin generator from classes / functions",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kasparsz/jquery-plugin-generator",
+  "repository": "kasparsz/jquery-plugin-generator",
+  "bugs": {
+    "url": "https://github.com/kasparsz/jquery-plugin-generator/issues"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "author": "Kaspars Zuks (https://github.com/kasparsz)",
+  "license": "MIT",
+  "files": [
+    "dist/jquery-plugin-generator.js"
+  ],
+  "main": "dist/jquery-plugin-generator.js",
+  "scripts": {
+    "docs": "verb",
+    "prepublish": "buble src/index.js -o dist/jquery-plugin-generator.js",
+    "test": "mocha"
+  },
+  "keywords": [
+    "jquery",
+    "plugin"
+  ],
+  "devDependencies": {
+    "buble": "^0.8.4",
+    "jquery": "^2.2.4",
+    "jsdom": "^9.1.0",
+    "mocha": "^2.4.5"
+  }
+}
