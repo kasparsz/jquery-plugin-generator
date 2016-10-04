@@ -8,4 +8,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Call ```setOptions``` method on sub-sequent calls [\#1](https://github.com/kasparsz/jquery-plugin-generator/issues/1)
 
-[1.1.0]: https://github.com/kasparsz/jquery-app/compare/v1.0.0...v1.1.0
+[1.1.0]: https://github.com/kasparsz/jquery-plugin-generator/compare/v1.0.0...v1.1.0
