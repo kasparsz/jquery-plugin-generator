@@ -5,8 +5,6 @@
  * Licensed under the MIT License.
  */
 
-"use strict";
-
 // guid counter
 var UID = 0;
 
@@ -43,6 +41,11 @@ function getInstance ($element, fn, params, options) {
             return;
         } else {
             $element.data(options.namespace, instance);
+        }
+    } else {
+        // Set options
+        if (options.optionsSetter && typeof instance[options.optionsSetter] === 'function') {
+            instance[options.optionsSetter].apply(instance, params);
         }
     }
 
@@ -131,7 +134,10 @@ function generate (fn, opts = {}) {
         'api': null,
 
         // Namespace, which is used to store class / function instance in element data
-        'namespace': guid()
+        'namespace': guid(),
+
+        // Options setter method name
+        'optionsSetter': 'setOptions'
     }, opts);
 
     if (typeof fn === 'function') {

@@ -138,4 +138,43 @@ describe('jquery-plugin-generator', function(done) {
         done();
     }));
 
+    it('should call setOptions on subsequent calls', createTestEnv(function (done, $) {
+        var pluginCalled = 0;
+        var pluginArgs = [];
+        var setOptionsCalled = 0;
+        var setOptionsArgs = [];
+
+        var args = [];
+
+        var plugin = function (element, a, b) {
+            pluginCalled++;
+            pluginArgs = [element, a, b];
+
+            this.setOptions = function (a, b) {
+                setOptionsCalled++;
+                setOptionsArgs = [a, b];
+            };
+        };
+
+        $.fn.test = generate(plugin);
+
+        var element = $('<div></div>');
+
+        element.test({'a': 1}, 'b'); // constructor
+
+        element.test({'a': 2}, 'd'); // setOptions
+        element.test({'a': 3}, 'f'); // setOptions
+
+        assert.equal(pluginCalled, 1);
+        assert.equal(pluginArgs[0].get(0), element.get(0));
+        assert.deepEqual(pluginArgs[1], {'a': 1});
+        assert.equal(pluginArgs[2], 'b');
+
+        assert.equal(setOptionsCalled, 2);
+        assert.deepEqual(setOptionsArgs[0], {'a': 3});
+        assert.equal(setOptionsArgs[1], 'f');
+
+        done();
+    }));
+
 });

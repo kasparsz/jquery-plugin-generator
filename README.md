@@ -18,44 +18,95 @@ $ npm install jquery-plugin-generator --save
 
 ## Usage
 
+### Create plugin
+
 ```js
 var generate = require('jquery-plugin-generator');
 
 function MyPlugin ($element, options) {
-    this.$element = $element;
-    this.options  = $.extend({'firstName': '', 'lastName': ''}, options);
+    this.options = $.extend({'firstName': '', 'lastName': ''}, options);
 
-    this.update(this.options.firstName, this.options.lastName);
+    console.log('constructor: ' + this.options.firstName + ' ' + this.options.lastName);
 }
 
 MyPlugin.prototype = {
     update: function (firstName, lastName) {
-        console.log(firstName + ' ' + lastName);
+        console.log('update: ' + firstName + ' ' + lastName);
     }
 };
 
-$.fn.myplugin = generate(MyPlugin /* function / class */, {} /* generator options */);
+$.fn.myplugin = generate(MyPlugin /* function or ES6 class */, {} /* plugin generator options */);
+```
 
-/* Use plugin, will be called only once for each element */
+### Call plugin
+
+jQuery plugin can be called on the same element multiple times, but constructor (MyPlugin) will be called on each element only once.
+
+Constructors first argument always will be jQuery element, all other arguments will be passed to the constructor as is.
+```js
 $('div').myplugin({'firstName': 'John', 'lastName': 'Doe'});
-//=> John Doe
+//console => constructor: John Doe
+```
 
-/* Call api method */
-$('div').myplugin('update' /* api method name */, 'Jane', 'Doe');
-//=> Jane Doe
+Call MyPlugin API method by passing function name as first argument, rest of the arguments will be passed to the function unchanged
+```js
+$('div').myplugin('update', 'Jane', 'Doe');
+//console => update: Jane Doe
+```
+
+Calling API method on element for first time will first call constructor and then API method.
+Constructor will be called with `options` empty.
+```js
+$('div').myplugin('update', 'Jonathan', 'Doe');
+//console => constructor:
+//console => update: Jonathan Doe
+```
+
+## Calling plugin on same element multiple times
+
+Constructor is called only once, but to allow plugins to change options or do something else on subsequent calls you can implement ```setOptions``` method.
+
+```setOptions``` will be called if constructor has already been called on the element and it will the same arguments with which plugin was called.
+If function or class method doesn't have this method, then will fail silently.
+
+You can specify different method name by passing ```optionsSetter``` option to the generator.
+
+```js
+function MyPlugin ($element, options) {
+    this.options = $.extend({'firstName': '', 'lastName': ''}, options);
+
+    console.log('constructor: ' + this.options.firstName + ' ' + this.options.lastName);
+}
+
+MyPlugin.prototype = {
+    update: function (options) {
+        console.log('update: ' + options.firstName + ' ' + options.lastName);
+    }
+};
+
+$.fn.myplugin = generate(MyPlugin, {'optionsSetter': 'update'});
+
+
+
+$('div').myplugin({'firstName': 'John', 'lastName': 'Doe'});
+//console => constructor: John Doe
+
+$('div').myplugin({'firstName': 'Jonathan', 'lastName': 'Doe'});
+//console => update: Jonathan Doe
 ```
 
 ## API
 
 #### `generator(fn, [options])`
 
-`fn` Function / class, which will be called using `new` keyword for each element plugin is called for. As first argument will be passed jQuery element, all following arguments will be same as they were used when calling a plugin.
+`fn` Function or ES6 class, which will be called using `new` keyword for each element plugin is called for. As first argument will be passed jQuery element, all following arguments will be same as they were used when calling a plugin.
 
-### Options
+### Plugin generator options
 
 | Name     | Type    | Usage                                    | Default  |
 | -------- | ------- | ---------------------------------------- | -------- |
 | api    | Array | List of method / function names, which are accessible using ```.myplugin('apiMethodName')``` By default all methods are accessible  | null     |
+| optionsSetter | String | Method name. If plugin has already been initialized, then calling plugin again on same element will trigger method with this name | setOptions |
 
 ## Running tests
 
