@@ -10,16 +10,18 @@ var generate = require('./dist/jquery-plugin-generator.js');
 
 function createTestEnv(fn) {
     return function (done) {
-        jsdom.env('', {
-            src: [jQuery],
-            done: function (err, window) {
-                if (err) throw err; // everything should fail
-                fn(done, window.$);
-                window.close(); // clean up memory
-            }
-        });
+        var dom = new jsdom.JSDOM('<html><body></body></html>', {'runScripts': 'dangerously'});
+        var window = dom.window;
+
+        var script = window.document.createElement('script');
+        script.textContent = jQuery;
+        window.document.body.appendChild(script);
+
+        fn(done, window.$);
+        window.close(); // clean up memory
     };
 }
+
 
 describe('jquery-plugin-generator', function(done) {
 
