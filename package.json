@@ -1,7 +1,7 @@
 {
   "name": "jquery-plugin-generator",
   "description": "jQuery plugin generator from classes / functions",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "homepage": "https://github.com/kasparsz/jquery-plugin-generator",
   "repository": "kasparsz/jquery-plugin-generator",
   "bugs": {
@@ -25,9 +25,9 @@
     "plugin"
   ],
   "devDependencies": {
-    "buble": "^0.18.0",
+    "buble": "^0.19.7",
     "jquery": "^3.3.1",
-    "jsdom": "^11.6.0",
-    "mocha": "^5.0.0"
+    "jsdom": "^14.0.0",
+    "mocha": "^6.0.2"
   }
 }
