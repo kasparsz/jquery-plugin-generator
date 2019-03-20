@@ -95,6 +95,23 @@ $('div').myplugin({'firstName': 'Jonathan', 'lastName': 'Doe'});
 //console => update: Jonathan Doe
 ```
 
+## Getting class/function instance from element
+
+To get class/function instance call ```myplugin('instance')``` API method.
+If plugin is not called on element before then it will return ```null```.
+
+```js
+// Plugin hasn't been called on element before, will return null
+$('div').myplugin('instance'); // => null
+
+// Call plugin on element
+$('div').myplugin({'firstName': 'John', 'lastName': 'Doe'});
+
+// 
+$('div').myplugin('instance'); // => MyPlugin {options: {...}}
+$('div').myplugin('instance').options.firstName // => "John"
+```
+
 ## API
 
 #### `generator(fn, [options])`
@@ -118,7 +135,7 @@ $ npm install -d && npm test
 
 ## License
 
-Copyright © 2016, [Kaspars Zuks](https://github.com/kasparsz).
+Copyright © 2019, [Kaspars Zuks](https://github.com/kasparsz).
 Released under the [MIT license](https://github.com/kasparsz/jquery-plugin-generator/blob/master/LICENSE).
 
 [npm-url]: https://npmjs.org/package/jquery-plugin-generator

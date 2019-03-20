@@ -1,7 +1,7 @@
 /*!
  * jquery-plugin-generator <https://github.com/kasparsz/jquery-plugin-generator>
  *
- * Copyright (c) 2016, Kaspars Zuks.
+ * Copyright (c) 2019, Kaspars Zuks.
  * Licensed under the MIT License.
  */
 
@@ -87,13 +87,14 @@ function call ($element, fn, args, options) {
     var apiName = ref.apiName;
     var apiParams = ref.apiParams;
     var params = ref.params;
-    var instance = getInstance($element, fn, params, options);
 
-    if (instance && apiName) {
-        if (apiName === 'instance') {
-            // Special API method, returns class / function instance
-            return instance;
-        } else if (apiName && typeof instance[apiName] === 'function') {
+    if (apiName === 'instance') {
+        // Special API method, returns class / function instance without creating it
+        return $element.data(options.namespace) || null;
+    } else {
+        var instance = getInstance($element, fn, params, options);
+
+        if (instance && apiName) {
             return instance[apiName].apply(instance, apiParams);
         }
     }

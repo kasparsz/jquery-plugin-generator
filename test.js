@@ -179,4 +179,34 @@ describe('jquery-plugin-generator', function(done) {
         done();
     }));
 
+    it('calling `instance` API method shouldn\'t create a new instance if it doesn\'t exist', createTestEnv(function (done, $) {
+        var plugin = function () {
+            throw 'Instance was created while it shouldn\'t be';
+        };
+
+        $.fn.test = generate(plugin);
+
+        var instance = $('<div></div>').test('instance');
+
+        assert.equal(instance, null);
+
+        done();
+    }));
+
+    it('calling `instance` API method should return function/class instance', createTestEnv(function (done, $) {
+        var plugin = function () {};
+
+        $.fn.test = generate(plugin);
+
+        var element = $('<div></div>');
+        element.test();
+
+        var instance = element.test('instance');
+
+        assert.equal(typeof instance, 'object');
+        assert.equal(instance instanceof plugin, true);
+
+        done();
+    }));
+
 });
