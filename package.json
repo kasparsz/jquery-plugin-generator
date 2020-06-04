@@ -1,7 +1,7 @@
 {
   "name": "jquery-plugin-generator",
   "description": "jQuery plugin generator from classes / functions",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "homepage": "https://github.com/kasparsz/jquery-plugin-generator",
   "repository": "kasparsz/jquery-plugin-generator",
   "bugs": {
@@ -17,7 +17,9 @@
   ],
   "main": "dist/jquery-plugin-generator.js",
   "scripts": {
-    "prepublish": "buble src/index.js -o dist/jquery-plugin-generator.js",
+    "build": "buble src/index.js -o dist/jquery-plugin-generator.js",
+    "compress": "uglifyjs dist/jquery-plugin-generator.js --output dist/jquery-plugin-generator.min.js --compress --mangle",
+    "prepublish": "npm run build && npm run compress",
     "test": "mocha"
   },
   "keywords": [
@@ -25,9 +27,10 @@
     "plugin"
   ],
   "devDependencies": {
-    "buble": "^0.19.7",
-    "jquery": "^3.3.1",
-    "jsdom": "^14.0.0",
-    "mocha": "^6.0.2"
+    "buble": "^0.20.0",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.2.0",
+    "mocha": "^7.2.0",
+    "uglify-js": "^3.9.4"
   }
 }

@@ -1,7 +1,7 @@
 /*!
  * jquery-plugin-generator <https://github.com/kasparsz/jquery-plugin-generator>
  *
- * Copyright (c) 2019, Kaspars Zuks.
+ * Copyright (c) 2020, Kaspars Zuks.
  * Licensed under the MIT License.
  */
 

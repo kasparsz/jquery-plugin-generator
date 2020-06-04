@@ -135,7 +135,7 @@ $ npm install -d && npm test
 
 ## License
 
-Copyright © 2019, [Kaspars Zuks](https://github.com/kasparsz).
+Copyright © 2020, [Kaspars Zuks](https://github.com/kasparsz).
 Released under the [MIT license](https://github.com/kasparsz/jquery-plugin-generator/blob/master/LICENSE).
 
 [npm-url]: https://npmjs.org/package/jquery-plugin-generator
