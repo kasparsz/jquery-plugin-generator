@@ -34,7 +34,14 @@ function getInstance ($element, fn, params, options) {
     if (!instance) {
         // See http://stackoverflow.com/questions/1606797/use-of-apply-with-new-operator-is-this-possible#answer-8843181
         var f = fn.bind.apply(fn, [fn, $element].concat(params));
-        instance = new f();
+
+        if (fn.prototype) {
+            // Class or function
+            instance = new f();
+        } else {
+            // Arrow function
+            instance = f();
+        }
 
         if (!instance || typeof instance !== 'object') {
             // Failure, possibly intentional by function, skip

@@ -33,6 +33,18 @@ describe('jquery-plugin-generator', function(done) {
 
     });
 
+    it('should not throw error if arrow function is provided', createTestEnv(function (done, $) {
+        assert.doesNotThrow(function () {
+            $.fn.test = generate(() => {});
+
+            $('<div></div><div></div>').test();
+
+            assert.equal('function', typeof $.fn.test);
+        }, TypeError);
+
+        done();
+    }));
+
     it('should return a function', function () {
 
         var plugin = generate(function () {});
